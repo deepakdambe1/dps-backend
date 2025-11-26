@@ -31,16 +31,12 @@ class DoctorServiceTest {
     @BeforeEach
     void setUp() {
         doctor1 = new Doctor();
-        doctor1.setFirstName("John");
-        doctor1.setLastName("Doe");
         doctor1.setSpecialization("Cardiology");
         doctor1.setPhone("123-456-7890");
         doctor1.setEmail("john.doe@example.com");
         doctor1.setId(1L);
         
         doctor2 = new Doctor();
-        doctor2.setFirstName("Jane");
-        doctor2.setLastName("Smith");
         doctor2.setSpecialization("Pediatrics");
         doctor2.setPhone("098-765-4321");
         doctor2.setEmail("jane.smith@example.com");
@@ -65,7 +61,6 @@ class DoctorServiceTest {
         Optional<Doctor> foundDoctor = doctorService.getDoctorById(1L);
 
         assertTrue(foundDoctor.isPresent());
-        assertEquals(doctor1.getFirstName(), foundDoctor.get().getFirstName());
         verify(doctorRepository, times(1)).findById(1L);
     }
 
@@ -86,15 +81,12 @@ class DoctorServiceTest {
         Doctor createdDoctor = doctorService.createDoctor(doctor1);
 
         assertNotNull(createdDoctor);
-        assertEquals(doctor1.getFirstName(), createdDoctor.getFirstName());
         verify(doctorRepository, times(1)).save(doctor1);
     }
 
     @Test
     void updateDoctor() {
         Doctor updatedDetails = new Doctor();
-        updatedDetails.setFirstName("John");
-        updatedDetails.setLastName("Doe");
         updatedDetails.setSpecialization("Oncology");
         updatedDetails.setPhone("123-456-7890");
         updatedDetails.setEmail("john.doe@example.com");
@@ -114,8 +106,6 @@ class DoctorServiceTest {
     @Test
     void updateDoctor_NotFound() {
         Doctor updatedDetails = new Doctor();
-        updatedDetails.setFirstName("John");
-        updatedDetails.setLastName("Doe");
         updatedDetails.setSpecialization("Oncology");
         updatedDetails.setPhone("123-456-7890");
         updatedDetails.setEmail("john.doe@example.com");

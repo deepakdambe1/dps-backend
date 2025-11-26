@@ -1,0 +1,75 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-create-doctor-table
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: doctor
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: degree
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: specialization
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: phone
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: receptionID
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: doctorID
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: clinicOpenTime
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: clinicCloseTime
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: apmmntDuration
+                  type: INT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdBy
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: createdAt
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: doctor
+

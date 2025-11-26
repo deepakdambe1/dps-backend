@@ -73,3 +73,78 @@ databaseChangeLog:
         - dropTable:
             tableName: doctor
 
+  - changeSet:
+      id: 2-create-user-table
+      author: jayawant
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: CHAR(12)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: CHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: CHAR(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: first_name
+                  type: CHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: last_name
+                  type: CHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: mobile_no
+                  type: CHAR(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: aadhar_card
+                  type: CHAR(12)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: city
+                  type: CHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: area
+                  type: CHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: gender
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: user
+

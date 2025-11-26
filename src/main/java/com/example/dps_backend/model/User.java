@@ -1,0 +1,46 @@
+package com.example.dps_backend.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "user")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String username;
+    private String password;
+    private String role;
+    private String firstName;
+    private String lastName;
+    private String mobileNo;
+    private String aadharCard;
+    private String city;
+    private String area;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    private String createdAt;
+
+    public enum Gender {
+        MALE,
+        FEMALE,
+        OTHER
+    }
+}
+

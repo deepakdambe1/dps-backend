@@ -16,22 +16,22 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: degree
-                  type: VARCHAR(255)
+                  type: CHAR(10)
                   constraints:
                     nullable: true
               - column:
                   name: specialization
-                  type: VARCHAR(255)
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
                   name: phone
-                  type: VARCHAR(50)
+                  type: CHAR(11)
                   constraints:
                     nullable: true
               - column:
                   name: email
-                  type: VARCHAR(255)
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
@@ -41,17 +41,17 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: doctorID
-                  type: BIGINT
+                  type: CHAR(11)
                   constraints:
                     nullable: true
               - column:
                   name: clinicOpenTime
-                  type: VARCHAR(20)
+                  type: TIMESTAMP
                   constraints:
                     nullable: true
               - column:
                   name: clinicCloseTime
-                  type: VARCHAR(20)
+                  type: TIMESTAMP
                   constraints:
                     nullable: true
               - column:
@@ -61,12 +61,12 @@ databaseChangeLog:
                     nullable: true
               - column:
                   name: createdBy
-                  type: VARCHAR(100)
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
                   name: createdAt
-                  type: VARCHAR(50)
+                  type: DATETIME
                   constraints:
                     nullable: true
       rollback:
@@ -96,42 +96,42 @@ databaseChangeLog:
                     unique: true
               - column:
                   name: password
-                  type: CHAR(10)
+                  type: CHAR(12)
                   constraints:
                     nullable: false
               - column:
                   name: role
                   type: CHAR(10)
                   constraints:
-                    nullable: true
+                    nullable: false
               - column:
-                  name: first_name
-                  type: CHAR(15)
+                  name: firstName
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
-                  name: last_name
-                  type: CHAR(15)
+                  name: lastName
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
-                  name: mobile_no
-                  type: CHAR(10)
+                  name: mobileNo
+                  type: CHAR(12)
                   constraints:
                     nullable: true
               - column:
-                  name: aadhar_card
+                  name: aadharCard
                   type: CHAR(12)
                   constraints:
                     nullable: true
               - column:
                   name: city
-                  type: CHAR(15)
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
                   name: area
-                  type: CHAR(15)
+                  type: CHAR(25)
                   constraints:
                     nullable: true
               - column:
@@ -140,8 +140,13 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: created_at
-                  type: TIMESTAMP
+                  name: createdAt
+                  type: DATETIME
+                  constraints:
+                    nullable: true
+              - column:
+                  name: lastLoginAt
+                  type: DATETIME
                   constraints:
                     nullable: true
       rollback:

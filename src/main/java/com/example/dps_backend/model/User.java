@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "user")
 @Data
@@ -35,7 +37,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    private String createdAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime lastLoginAt;
 
     public enum Gender {
         MALE,

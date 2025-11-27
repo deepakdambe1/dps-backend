@@ -6,6 +6,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 public class Doctor {
@@ -19,11 +21,11 @@ public class Doctor {
     private String phone;
     private String email;
     private String receptionID;
-    private Long doctorID;
+    private String doctorID;
     private String clinicOpenTime;
     private String clinicCloseTime;
-    private String createdBy;
-    private String createdAt;
     private Integer apmmntDuration;
+    private String createdBy;
+    private LocalDateTime createdAt;
 
 }

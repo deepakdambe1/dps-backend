@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-public class Doctor {
+public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +17,12 @@ public class Doctor {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    private String degree;
-    private String specialization;
-    private String phone;
-    private String email;
-    private String receptionID;
-    private String doctorID;
-    private String clinicOpenTime;
-    private String clinicCloseTime;
-    private Integer apmmntDuration;
+    private Double height;
+    private String bloodGroup;
+    private String maritalStatus;
+    private String medicalHistory;
     private String createdBy;
     private LocalDateTime createdAt;
 
 }
+

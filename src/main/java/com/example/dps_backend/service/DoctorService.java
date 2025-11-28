@@ -30,9 +30,16 @@ public class DoctorService {
         Optional<Doctor> doctor = doctorRepository.findById(id);
         if (doctor.isPresent()) {
             Doctor existingDoctor = doctor.get();
+            existingDoctor.setUser(doctorDetails.getUser());
+            existingDoctor.setDegree(doctorDetails.getDegree());
             existingDoctor.setSpecialization(doctorDetails.getSpecialization());
             existingDoctor.setPhone(doctorDetails.getPhone());
             existingDoctor.setEmail(doctorDetails.getEmail());
+            existingDoctor.setReceptionID(doctorDetails.getReceptionID());
+            existingDoctor.setDoctorID(doctorDetails.getDoctorID());
+            existingDoctor.setClinicOpenTime(doctorDetails.getClinicOpenTime());
+            existingDoctor.setClinicCloseTime(doctorDetails.getClinicCloseTime());
+            existingDoctor.setApmmntDuration(doctorDetails.getApmmntDuration());
             return doctorRepository.save(existingDoctor);
         }
         return null;

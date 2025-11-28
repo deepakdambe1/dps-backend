@@ -153,3 +153,326 @@ databaseChangeLog:
         - dropTable:
             tableName: user
 
+  - changeSet:
+      id: 3-create-patient-table
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: patient
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: height
+                  type: DOUBLE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: blood_group
+                  type: CHAR(5)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: marital_status
+                  type: CHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: medical_history
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_by
+                  type: CHAR(25)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: patient
+
+  - changeSet:
+      id: 4-create-visit-table
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: visit
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: doctor_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: visit_time
+                  type: DATETIME
+                  constraints:
+                    nullable: true
+              - column:
+                  name: symptoms
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: doc_observation
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: prescription
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: treatment
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: reports
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: weight
+                  type: DOUBLE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: bp
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: suger
+                  type: DOUBLE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: doctor_fees
+                  type: DOUBLE
+                  constraints:
+                    nullable: true
+              - column:
+                  name: upload_report
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: visit
+
+  - changeSet:
+      id: 5-add-fk-visit-doctor
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: visit
+            baseColumnNames: doctor_id
+            referencedTableName: doctor
+            referencedColumnNames: id
+            constraintName: fk_visit_doctor_id
+
+  - changeSet:
+      id: 6-add-fk-visit-patient
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: visit
+            baseColumnNames: patient_id
+            referencedTableName: patient
+            referencedColumnNames: id
+            constraintName: fk_visit_patient_id
+
+  - changeSet:
+      id: 7-create-appointment-table
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: appointment
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: doctor_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: appoint_time
+                  type: DATETIME
+                  constraints:
+                    nullable: true
+              - column:
+                  name: symptoms
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: doc_mob_no
+                  type: VARCHAR(15)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_by
+                  type: CHAR(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: appointment
+
+  - changeSet:
+      id: 8-add-fk-appointment-doctor
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: appointment
+            baseColumnNames: doctor_id
+            referencedTableName: doctor
+            referencedColumnNames: id
+            constraintName: fk_appointment_doctor_id
+
+  - changeSet:
+      id: 9-add-fk-appointment-patient
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: appointment
+            baseColumnNames: patient_id
+            referencedTableName: patient
+            referencedColumnNames: id
+            constraintName: fk_appointment_patient_id
+
+  - changeSet:
+      id: 10-create-audit-table
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - createTable:
+            tableName: audit
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: action_type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: exception_details
+                  type: LONGTEXT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_at
+                  type: DATETIME
+                  constraints:
+                    nullable: true
+              - column:
+                  name: created_by
+                  type: CHAR(25)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: status
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: doctor_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+              - column:
+                  name: patient_id
+                  type: BIGINT
+                  constraints:
+                    nullable: true
+      rollback:
+        - dropTable:
+            tableName: audit
+
+  - changeSet:
+      id: 11-add-fk-audit-doctor
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: audit
+            baseColumnNames: doctor_id
+            referencedTableName: doctor
+            referencedColumnNames: id
+            constraintName: fk_audit_doctor_id
+
+  - changeSet:
+      id: 12-add-fk-audit-patient
+      author: deepak
+      schemaName: doctorpatientdb1
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: audit
+            baseColumnNames: patient_id
+            referencedTableName: patient
+            referencedColumnNames: id
+            constraintName: fk_audit_patient_id
+

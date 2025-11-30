@@ -1,6 +1,6 @@
 package com.example.dps_backend.service;
 
-import com.example.dps_backend.model.User;
+import com.example.dps_backend.model.Users;
 import com.example.dps_backend.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserServiceTest {
+class UsersServiceTest {
 
     @Mock
     private UserRepository userRepository;
@@ -24,10 +24,10 @@ class UserServiceTest {
 
     @Test
     void createUser_callsRepositoryAndReturnsSaved() {
-        User user = mock(User.class);
+        Users user = mock(Users.class);
         when(userRepository.save(user)).thenReturn(user);
 
-        User result = userService.createUser(user);
+        Users result = userService.createUser(user);
 
         assertSame(user, result);
         verify(userRepository, times(1)).save(user);
@@ -36,10 +36,10 @@ class UserServiceTest {
     @Test
     void getUserById_whenFound_returnsOptionalWithUser() {
         Long id = 1L;
-        User user = mock(User.class);
+        Users user = mock(Users.class);
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
 
-        Optional<User> result = userService.getUserById(id);
+        Optional<Users> result = userService.getUserById(id);
 
         assertTrue(result.isPresent());
         assertSame(user, result.get());
@@ -51,7 +51,7 @@ class UserServiceTest {
         Long id = 2L;
         when(userRepository.findById(id)).thenReturn(Optional.empty());
 
-        Optional<User> result = userService.getUserById(id);
+        Optional<Users> result = userService.getUserById(id);
 
         assertFalse(result.isPresent());
         verify(userRepository).findById(id);
@@ -60,10 +60,10 @@ class UserServiceTest {
     @Test
     void getUserByUsername_returnsUserFromRepository() {
         String username = "alice";
-        User user = mock(User.class);
+        Users user = mock(Users.class);
         when(userRepository.findByUsername(username)).thenReturn(user);
 
-        User result = userService.getUserByUsername(username);
+        Users result = userService.getUserByUsername(username);
 
         assertSame(user, result);
         verify(userRepository).findByUsername(username);
@@ -71,12 +71,12 @@ class UserServiceTest {
 
     @Test
     void getAllUsers_returnsListFromRepository() {
-        User u1 = mock(User.class);
-        User u2 = mock(User.class);
-        List<User> users = Arrays.asList(u1, u2);
+        Users u1 = mock(Users.class);
+        Users u2 = mock(Users.class);
+        List<Users> users = Arrays.asList(u1, u2);
         when(userRepository.findAll()).thenReturn(users);
 
-        List<User> result = userService.getAllUsers();
+        List<Users> result = userService.getAllUsers();
 
         assertEquals(2, result.size());
         assertSame(u1, result.get(0));
@@ -87,27 +87,27 @@ class UserServiceTest {
     @Test
     void updateUser_whenExists_savesAndReturnsUpdated() {
         Long id = 10L;
-        User existing = mock(User.class);
-        User input = mock(User.class);
-        User saved = mock(User.class);
+        Users existing = mock(Users.class);
+        Users input = mock(Users.class);
+        Users saved = mock(Users.class);
 
         when(userRepository.findById(id)).thenReturn(Optional.of(existing));
-        when(userRepository.save(any(User.class))).thenReturn(saved);
+        when(userRepository.save(any(Users.class))).thenReturn(saved);
 
-        User result = userService.updateUser(id, input);
+        Users result = userService.updateUser(id, input);
 
         assertSame(saved, result);
         verify(userRepository).findById(id);
-        verify(userRepository).save(any(User.class));
+        verify(userRepository).save(any(Users.class));
     }
 
     @Test
     void updateUser_whenNotExists_returnsNull() {
         Long id = 11L;
-        User input = mock(User.class);
+        Users input = mock(Users.class);
         when(userRepository.findById(id)).thenReturn(Optional.empty());
 
-        User result = userService.updateUser(id, input);
+        Users result = userService.updateUser(id, input);
 
         assertNull(result);
         verify(userRepository).findById(id);

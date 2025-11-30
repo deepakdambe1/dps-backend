@@ -1,6 +1,6 @@
 package com.example.dps_backend.controller;
 
-import com.example.dps_backend.model.User;
+import com.example.dps_backend.model.Users;
 import com.example.dps_backend.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class UserControllerTest {
+class UsersControllerTest {
 
     @Mock
     private UserService userService;
@@ -26,11 +26,11 @@ class UserControllerTest {
 
     @Test
     void createUser_returnsCreatedWithBody() {
-        User input = mock(User.class);
-        User created = mock(User.class);
+        Users input = mock(Users.class);
+        Users created = mock(Users.class);
         when(userService.createUser(input)).thenReturn(created);
 
-        ResponseEntity<User> resp = userController.createUser(input);
+        ResponseEntity<Users> resp = userController.createUser(input);
 
         assertEquals(HttpStatus.CREATED, resp.getStatusCode());
         assertSame(created, resp.getBody());
@@ -40,10 +40,10 @@ class UserControllerTest {
     @Test
     void getUserById_found_returnsOkAndBody() {
         Long id = 1L;
-        User user = mock(User.class);
+        Users user = mock(Users.class);
         when(userService.getUserById(id)).thenReturn(Optional.of(user));
 
-        ResponseEntity<User> resp = userController.getUserById(id);
+        ResponseEntity<Users> resp = userController.getUserById(id);
 
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         assertSame(user, resp.getBody());
@@ -54,7 +54,7 @@ class UserControllerTest {
         Long id = 2L;
         when(userService.getUserById(id)).thenReturn(Optional.empty());
 
-        ResponseEntity<User> resp = userController.getUserById(id);
+        ResponseEntity<Users> resp = userController.getUserById(id);
 
         assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
         assertNull(resp.getBody());
@@ -63,10 +63,10 @@ class UserControllerTest {
     @Test
     void getUserByUsername_found_returnsOk() {
         String username = "bob";
-        User user = mock(User.class);
+        Users user = mock(Users.class);
         when(userService.getUserByUsername(username)).thenReturn(user);
 
-        ResponseEntity<User> resp = userController.getUserByUsername(username);
+        ResponseEntity<Users> resp = userController.getUserByUsername(username);
 
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         assertSame(user, resp.getBody());
@@ -77,7 +77,7 @@ class UserControllerTest {
         String username = "charlie";
         when(userService.getUserByUsername(username)).thenReturn(null);
 
-        ResponseEntity<User> resp = userController.getUserByUsername(username);
+        ResponseEntity<Users> resp = userController.getUserByUsername(username);
 
         assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
         assertNull(resp.getBody());
@@ -85,12 +85,12 @@ class UserControllerTest {
 
     @Test
     void getAllUsers_returnsOkWithList() {
-        User u1 = mock(User.class);
-        User u2 = mock(User.class);
-        List<User> users = Arrays.asList(u1, u2);
+        Users u1 = mock(Users.class);
+        Users u2 = mock(Users.class);
+        List<Users> users = Arrays.asList(u1, u2);
         when(userService.getAllUsers()).thenReturn(users);
 
-        ResponseEntity<List<User>> resp = userController.getAllUsers();
+        ResponseEntity<List<Users>> resp = userController.getAllUsers();
 
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         assertSame(users, resp.getBody());
@@ -99,11 +99,11 @@ class UserControllerTest {
     @Test
     void updateUser_whenSuccessful_returnsOk() {
         Long id = 7L;
-        User input = mock(User.class);
-        User updated = mock(User.class);
+        Users input = mock(Users.class);
+        Users updated = mock(Users.class);
         when(userService.updateUser(id, input)).thenReturn(updated);
 
-        ResponseEntity<User> resp = userController.updateUser(id, input);
+        ResponseEntity<Users> resp = userController.updateUser(id, input);
 
         assertEquals(HttpStatus.OK, resp.getStatusCode());
         assertSame(updated, resp.getBody());
@@ -112,10 +112,10 @@ class UserControllerTest {
     @Test
     void updateUser_whenNotFound_returnsNotFound() {
         Long id = 8L;
-        User input = mock(User.class);
+        Users input = mock(Users.class);
         when(userService.updateUser(id, input)).thenReturn(null);
 
-        ResponseEntity<User> resp = userController.updateUser(id, input);
+        ResponseEntity<Users> resp = userController.updateUser(id, input);
 
         assertEquals(HttpStatus.NOT_FOUND, resp.getStatusCode());
         assertNull(resp.getBody());

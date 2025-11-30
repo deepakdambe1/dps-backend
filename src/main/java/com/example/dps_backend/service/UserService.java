@@ -1,6 +1,6 @@
 package com.example.dps_backend.service;
 
-import com.example.dps_backend.model.User;
+import com.example.dps_backend.model.Users;
 import com.example.dps_backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,24 +14,24 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User createUser(User user) {
+    public Users createUser(Users user) {
         return userRepository.save(user);
     }
 
-    public Optional<User> getUserById(Long id) {
+    public Optional<Users> getUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public User getUserByUsername(String username) {
+    public Users getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 
-    public List<User> getAllUsers() {
+    public List<Users> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User updateUser(Long id, User user) {
-        Optional<User> existingUser = userRepository.findById(id);
+    public Users updateUser(Long id, Users user) {
+        Optional<Users> existingUser = userRepository.findById(id);
         if (existingUser.isPresent()) {
             user.setId(id);
             return userRepository.save(user);
